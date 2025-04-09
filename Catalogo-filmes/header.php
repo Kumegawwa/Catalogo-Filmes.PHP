@@ -76,17 +76,22 @@ if (session_status() == PHP_SESSION_NONE) {
             </li>
         <?php endif; ?>
       </ul>
-      <div class="d-flex align-items-center">
-        <form class="d-flex me-2" method="get" action="index.php">
-          <input class="form-control me-2" type="search" style="min-width: 240px;" placeholder="Buscar por título ou gênero" name="filtro" aria-label="Buscar" value="<?php echo isset($_GET['filtro']) ? htmlspecialchars      ($_GET['filtro']) : ''; ?>">
-          <button class="btn btn-warning" type="submit">Buscar</button>
-        </form>
+      <div class="d-flex flex-column flex-lg-row navbar-right-items ms-lg-auto">
 
-        <?php if (isset($_SESSION['logado']) && $_SESSION['logado'] === true): ?>
-          <a class="btn btn-outline-danger" href="logout.php">
-            Logout (<?php echo isset($_SESSION['usuario']) ? htmlspecialchars($_SESSION['usuario']) : 'Usuário'; ?>)
-          </a>
-        <?php endif; ?>
+          <form class="d-flex me-lg-2 my-2 my-lg-0" method="get" action="index.php">
+              <input class="form-control me-2" type="search" placeholder="Buscar filme ou gênero" name="filtro" aria-label="Buscar" value="<?php echo isset($_GET['filtro']) ? htmlspecialchars($_GET['filtro']) : ''; ?>">
+              <button class="btn btn-warning" type="submit">Buscar</button>
+          </form>
+
+          <ul class="navbar-nav mb-2 mb-lg-0 mt-2 mt-lg-0">
+              <?php if (isset($_SESSION['logado']) && $_SESSION['logado'] === true): ?>
+                  <li class="nav-item">
+                      <a class="btn btn-outline-danger" href="logout.php">
+                          Logout (<?php echo isset($_SESSION['usuario']) ? htmlspecialchars($_SESSION['usuario']) : 'Usuário'; ?>)
+                      </a>
+                  </li>
+              <?php endif; ?>
+          </ul>
       </div>
     </div>
   </div>
