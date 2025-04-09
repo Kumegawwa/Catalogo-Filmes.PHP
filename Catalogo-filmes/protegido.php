@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($titulo) || empty($genero) || $ano === false || $ano === null) {
         $mensagemErroForm = 'Erro: Título, Gênero e Ano (válido entre 1895 e ' . (date("Y")) . ') são obrigatórios.';
     } elseif (empty($caminho_imagem)) {
-        $mensagemErroForm = 'Erro: URL inválida ou imagem maior que o suportado.';
+        $mensagemErroForm = 'Erro: URL inválida ou imagem maior que o tamanho suportado.';
     } else {
         if (!isset($_SESSION['filmes_adicionados']) || !is_array($_SESSION['filmes_adicionados'])) {
             $_SESSION['filmes_adicionados'] = [];
@@ -132,14 +132,17 @@ if (!empty($mensagemErroForm)) {
         <textarea class="form-control" id="descricao" name="descricao" rows="4"><?php echo isset($_POST['descricao']) ? htmlspecialchars($_POST['descricao']) : ''; ?></textarea>
     </div>
 
+    <p class="mt-3 mb-1"><strong>Capa do Filme:</strong> Você pode adicionar a capa fornecendo uma URL ou enviando um arquivo do seu computador.</p>
+    <p class="text-muted small mb-3">Obs: Se você fornecer ambos (URL e arquivo), o arquivo enviado terá prioridade.</p>
+
     <div class="mb-3">
-        <label for="url_imagem" class="form-label">URL da Imagem (opcional)</label>
+        <label for="url_imagem" class="form-label">URL da Imagem (Opcional se enviar arquivo)</label>
         <input type="url" class="form-control" id="url_imagem" name="url_imagem" placeholder="https://exemplo.com/imagem.jpg" value="<?php echo isset($_POST['url_imagem']) ? htmlspecialchars($_POST['url_imagem']) : ''; ?>">
     </div>
 
     <div class="mb-3">
-        <label for="upload_imagem" class="form-label">Ou envie uma imagem do seu computador</label>
-        <input type="file" class="form-control" id="upload_imagem" name="upload_imagem" accept="image/*">
+        <label for="upload_imagem" class="form-label">Ou envie uma imagem do seu computador (Opcional se fornecer URL)</label>
+        <input type="file" class="form-control" id="upload_imagem" name="upload_imagem" accept="image/jpeg, image/png">
         <div class="form-text">Formatos aceitos: JPG, PNG. Tamanho máximo: 2MB.</div>
     </div>
 
